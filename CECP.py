@@ -11,8 +11,7 @@ class ECP:
         self.m = m
         self.pointArgs = pointArgs
 
-    def signature(self, M, d, P):
-        h_ = 0
+    def signature(self, h_, d, P):
         e = 0
         alpha = 3
         if alpha % self.q == 0: e = 1
@@ -31,13 +30,12 @@ class ECP:
 
         return f"{r};{s}"
 
-    def verify(self, sign, M, Q, P):
+    def verify(self, sign, h_, Q, P):
         r, s = sign.split(";")
         r = int(r)
         s = int(s)
         if (r <= 0 and r >= self.q and s <= 0 and s >= self.q):
             return False
-        h_ = 0
         e = 0
         alpha = 3
         if alpha % self.q == 0: e = 1
